@@ -1,7 +1,9 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put } from "@nestjs/common";
 import { CategoriaService } from "../services/categoria.service";
 import { Categoria } from "../entities/categoria.entity";
+import { ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Categoria')
 @Controller('/categorias')
 export class CategoriaController {
     constructor(
@@ -14,16 +16,16 @@ export class CategoriaController {
         return this.categoriaService.buscarTodos();
     }
 
-    @Get('/:id')
-    @HttpCode(HttpStatus.OK)
-    buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<Categoria>{
-        return this.categoriaService.buscarPorId(id);
-    }
-
     @Get('/nome/:nome')
     @HttpCode(HttpStatus.OK)
     buscarPorNome(@Param('nome') nome: string): Promise<Categoria[]>{
         return this.categoriaService.buscarPorNome(nome);
+    }
+
+    @Get('/:id')
+    @HttpCode(HttpStatus.OK)
+    buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<Categoria>{
+        return this.categoriaService.buscarPorId(id);
     }
 
     @Post('/cadastrar')
