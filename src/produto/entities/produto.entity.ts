@@ -31,6 +31,14 @@ export class Produto {
     @Column({type: 'decimal', precision: 10, scale: 2 })
     preco: number;
 
+    // extras - mostra a quantidade de produtos e o status do estoque (que é calculado dinamicamente na service de acordo com a quantidade)
+    @Min(0, { message: 'O estoque não pode ter valor negativo' })
+    @Column({default: 0})
+    quantidade: number;
+
+    // não é armazenado no banco, serve somente para o retorno
+    estoque: string;
+
     //muitos produtos para uma categoria
     @ManyToOne(() => Categoria, (categoria) => categoria.produtos, { 
         onDelete: "CASCADE" 
