@@ -14,16 +14,16 @@ export class ProdutoController {
         return this.produtoService.buscarTodos();
     }
 
-    @Get('/:id')
-    @HttpCode(HttpStatus.OK)
-    buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<Produto>{
-        return this.produtoService.buscarPorId(id);
-    }
-
     @Get('/nome/:nome')
     @HttpCode(HttpStatus.OK)
     buscarPorNome(@Param('nome') nome: string): Promise<Produto[]>{
         return this.produtoService.buscarPorNome(nome);
+    }
+
+    @Get('/:id')
+    @HttpCode(HttpStatus.OK)
+    buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<Produto>{
+        return this.produtoService.buscarPorId(id);
     }
 
     @Post('/cadastrar')

@@ -14,16 +14,16 @@ export class CategoriaController {
         return this.categoriaService.buscarTodos();
     }
 
-    @Get('/:id')
-    @HttpCode(HttpStatus.OK)
-    buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<Categoria>{
-        return this.categoriaService.buscarPorId(id);
-    }
-
     @Get('/nome/:nome')
     @HttpCode(HttpStatus.OK)
     buscarPorNome(@Param('nome') nome: string): Promise<Categoria[]>{
         return this.categoriaService.buscarPorNome(nome);
+    }
+
+    @Get('/:id')
+    @HttpCode(HttpStatus.OK)
+    buscarPorId(@Param('id', ParseIntPipe) id: number): Promise<Categoria>{
+        return this.categoriaService.buscarPorId(id);
     }
 
     @Post('/cadastrar')
