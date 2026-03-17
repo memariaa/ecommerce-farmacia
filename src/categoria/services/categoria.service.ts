@@ -12,7 +12,11 @@ export class CategoriaService {
 
     // Métodos de busca
     async buscarTodos(): Promise<Categoria[]> {
-        return this.categoriaRepository.find();
+        return this.categoriaRepository.find({
+            relations: {
+                produtos: true
+            }
+        });
     }
 
     async buscarPorId(id:number): Promise<Categoria>{
@@ -20,6 +24,9 @@ export class CategoriaService {
             where: {
                 id
             },
+            relations: {
+                produtos: true
+            }
         });
 
         if(!categoria){
@@ -33,6 +40,9 @@ export class CategoriaService {
             where: {
                 nome: ILike(`%${nome}%`)
             },
+            relations: {
+                produtos: true
+            }
         });
     }
 

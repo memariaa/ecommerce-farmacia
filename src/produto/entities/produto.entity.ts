@@ -1,6 +1,7 @@
 import { Transform, TransformFnParams } from "class-transformer";
 import { IsNotEmpty, IsNumber, IsPositive, Length, Min } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Categoria } from "../../categoria/entities/categoria.entity";
 
 @Entity({name: 'tb_produto'})
 export class Produto {
@@ -29,5 +30,11 @@ export class Produto {
     @IsNotEmpty({ message: "É obrigatório escrever o valor do produto!" })
     @Column({type: 'decimal', precision: 10, scale: 2 })
     preco: number;
+
+    //muitos produtos para uma categoria
+    @ManyToOne(() => Categoria, (categoria) => categoria.produtos, { 
+        onDelete: "CASCADE" 
+    })
+    categoria: Categoria;
 
 }
